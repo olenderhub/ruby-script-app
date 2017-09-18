@@ -1,0 +1,88 @@
+To test manually the toy robot app just run the toy_robot_app.rb script.
+
+Available commands:
+PLACE X,Y,FACING ( place robot to the table with X,Y,FACING position )
+RIGHT            ( rotate the robot 90 degrees in the right - change facing )
+LEFT             ( rotate the robot 90 degrees in the left - change facing )
+REPORT           ( get current robot's position )
+MOVE             ( move the toy robot one unit forward in the direction it is currently facing )
+EXIT             ( quit console )
+
+Sample scenarios:
+
+1. Get current robot's position.
+
+run: toy_robot_app.rb
+type: PLACE 2,2,SOUTH
+type: REPORT
+
+output will be: 2,2,SOUTH
+
+2. Robot can move around table surface (We assumed that table have 5 x 5 dimensions). Robot can't go outside the table,
+if robot will be on edge of table and tries move outside, the command will be ignored.
+
+run: toy_robot_app.rb
+type: PLACE 2,2,SOUTH
+type: MOVE
+(it moves robot to 2,1,SOUTH coordinates)
+type: MOVE
+(it moves robot to 2,0,SOUTH coordinates)
+type: REPORT
+output will be 2,0,SOUTH
+
+type: MOVE
+(robot can't fall, so the command will be ignore)
+type: REPORT
+
+output will be: 2,0,SOUTH
+
+3. Robot can turn left from current position.
+
+run: toy_robot_app.rb
+type: PLACE 2,2,NORTH
+type: LEFT
+(it changes robot facing from NORTH to WEST)
+type: REPORT
+
+output will be: 2,2,WEST
+
+4. Robot can turn right from current position.
+
+run: toy_robot_app.rb
+type: PLACE 0,0,WEST
+type: RIGHT
+(it changes robot facing from WEST to NORTH)
+type: REPORT
+
+output will be: 0,0,NORTH
+
+5. It's possible to change place several time.
+
+run: toy_robot_app.rb
+type: PLACE 3,3,EAST
+type: REPORT
+
+output: 3,3,EAST
+
+type: PLACE 2,1,NORTH
+type: REPORT
+
+output: 2,1,NORTH
+
+6. MOVE, RIGHT, LEFT, REPORT commands are only available when user use PLACE X,Y,FACING before.
+
+run: toy_robot_app.rb
+type: RIGHT
+type: LEFT
+type: REPORT
+type: MOVE
+
+App will ignore these commands
+
+7. It's impossible to run not allowed commands - app will ignore it.
+
+run: toy_robot_app.rb
+type: WHATEVER
+type: PLACE -5,20,NORTH (wrong arguments for PLACE command)
+
+In this case robot still will not have any position
